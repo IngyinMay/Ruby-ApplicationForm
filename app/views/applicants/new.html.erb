@@ -1,0 +1,263 @@
+
+<div class="container">
+<h2 class="form-header">OJT Application Form</h2>
+
+  <%= form_with model: @applicant, url: confirm_applicants_path(@applicant) do |form| %>
+    <table>
+      <th colspan=2>Personal Information</th>
+      <tr>
+        <td class="left"><%= form.label :name, class: "required" %></td>
+        <td>
+          <%= form.text_field :name, value: old_or_session("name"), class:"form-control"%>
+          <% if @applicant.errors[:name].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:name][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="left"><%= form.label :profile_picture, "Profile Picture"%></td>
+        <td>
+          <%= form.file_field :profile_photo, direct_upload: true %>
+          <% if @applicant.errors[:profile_photo].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:profile_photo][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+      <tr>
+        <td class="left"><%= form.label :dob, "Date of Birth", class: "required"%></td>
+        <td>
+          <%= form.date_field :dob, value: old_or_session("dob") %>          
+          <% if @applicant.errors[:dob].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:dob][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="left"><%= form.label :phone, class: "required" %></td>
+        <td>
+          <div class="ph-div">
+            <%= form.text_field :phone_no1, value: old_or_session("phone_no1"), class:"ph-block form-control col-sm-2"%><span class="btn btn-primary add-phone" role="button">+</span>
+          </div>
+          <% if @applicant.errors[:phone_no1].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:phone_no1][0] %></div>
+          <% end %>
+          <% if old_or_session("phone_no2") %>
+            <div class="ph-div">
+              <%= form.text_field :phone_no2, value: old_or_session("phone_no2"), class:"ph-block form-control col-sm-2"%><span class="btn btn-primary add-phone" role="button">+</span>
+            </div>
+            <% if @applicant.errors[:phone_no2].any? %>
+              <div class="error-msg">This <%= @applicant.errors[:phone_no2][0] %></div>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="left"><%= form.label :email, class: "required" %></td>
+        <td>
+          <%= form.text_field :email, value: old_or_session("email"), class:"form-control"%>
+          <% if @applicant.errors[:email].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:email][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="left"><%= form.label :current_address, "Current Address", class: "required" %></td>
+        <td>
+          <%= form.text_area :current_address, value: old_or_session("current_address"), class:"form-control"%>
+          <% if @applicant.errors[:current_address].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:current_address][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="left"><%= form.label :hometown_address, "Hometown Address" %></td>
+        <td>
+          <%= form.text_area :hometown_address, value: old_or_session("hometown_address"), class:"form-control"%>
+          <% if @applicant.errors[:hometown_address].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:hometown_address][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    <table>
+      <th colspan=2>Education Background</th>
+      <tr>
+        <td rowspan=6 class="left"><%= form.label :edu_level, "Education Level" %></td>
+        <td class="sub-title"><%= form.label :bachelor, class: "required" %></td>
+      </tr>
+      <tr>
+        <td class="td-sub-title"><%= form.label :university, class:"w24 required" %><%= form.label :year, class:"w24 required" %><%= form.label :degree, class:"w24 required" %></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="w24">
+            <%= form.text_field :university, value: old_or_session("university"), class:"form-control"%>
+            <% if @applicant.errors[:university].any? %>
+              <div class="error-msg sub-error-msg">This <%= @applicant.errors[:university][0] %></div>
+            <% end %>
+          </div>
+          <div class="w24">
+            <%= form.text_field :graduated_year, value: old_or_session("graduated_year"), class:"form-control"%>
+            <% if @applicant.errors[:graduated_year].any? %>
+              <div class="error-msg sub-error-msg">This <%= @applicant.errors[:graduated_year][0] %></div>
+            <% end %>
+          </div>
+          <div class="w24">
+            <%= form.text_field :degree, value: old_or_session("degree"), class:"form-control"%>
+            <% if @applicant.errors[:degree].any? %>
+              <div class="error-msg sub-error-msg">This <%= @applicant.errors[:degree][0] %></div>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sub-title"><%= form.label :master %></td>
+      </tr>
+      <tr>
+        <td class="td-sub-title"><%= form.label :university, class:"w24" %><%= form.label :year, class:"w24" %><%= form.label :degree, class:"w24" %></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="w24">
+            <%= form.text_field :master_university, value: old_or_session("master_university"), class:"form-control"%>
+            <% if @applicant.errors[:master_university].any? %>
+              <div class="error-msg">This <%= @applicant.errors[:master_university][0] %></div>
+            <% end %>
+          </div>
+          <div class="w24">
+            <%= form.text_field :master_graduated_year, value: old_or_session("master_graduated_year"), class:"form-control"%>
+            <% if @applicant.errors[:master_graduated_year].any? %>
+              <div class="error-msg">This <%= @applicant.errors[:master_graduated_year][0] %></div>
+            <% end %>
+          </div>
+          <div class="w24">
+            <%= form.text_field :master_degree, value: old_or_session("master_degree"), class:"form-control"%>
+            <% if @applicant.errors[:master_degree].any? %>
+              <div class="error-msg">This <%= @applicant.errors[:master_degree][0] %></div>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="left"><%= form.label :diploma, "Diploma Name" %></td>
+        <td>
+          <%= form.text_field :diploma_name, value: old_or_session("diploma_name"), class:"form-control"%>
+          <% if @applicant.errors[:diploma_name].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:diploma_name][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="left"><%= form.label :certificate, "Other certificate" %></td>
+        <td>
+          <%= form.text_field :certificate, value: old_or_session("certificate"), class:"form-control"%>
+          <% if @applicant.errors[:certificate].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:certificate][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan=2 class="left"><%= form.label :programming, "Programming Skill" %><%= form.hidden_field :career_skills, value: old_or_session("career_skills") %></td>
+        <td><%= form.label :language, class:"w24" %><%= form.label :level, class:"w24" %></td>
+      </tr>
+      <tr>
+        <td class="career_skill_div">
+          <% if (old_or_session("career_skills").present? && old_or_session("career_skills").split(',').count > 1) %>
+            <% for count in 0..old_or_session("career_skills").split(',').count-1 do %>
+              <div class="lang-div">
+                <%= form.text_field :language, value: old_or_session("career_lang_" + count.to_s), class:"form-control w24 career_lang" %>
+                <%= form.text_field :level, value: old_or_session("career_level_" + count.to_s), class:"form-control w24 career_level"%>
+                <% if count == 0%> <a class="btn btn-primary lang-add-btn" role="button">+</a> <% end%>
+                <% if @applicant.errors[:language].any? %>
+                  <div class="error-msg">This <%= @applicant.errors[:language][0] %></div>
+                <% end %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="lang-div">
+              <%= form.text_field :language, value: old_or_session("career_lang_0"), class:"form-control w24 career_lang" %>
+              <%= form.text_field :level, value: old_or_session("career_level_0"), class:"form-control w24 career_level"%><a class="btn btn-primary lang-add-btn" role="button">+</a>
+              <% if @applicant.errors[:language].any? %>
+                <div class="error-msg">This <%= @applicant.errors[:language][0] %></div>
+              <% end %>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan=6 class="left"><%= form.label :language, "Language Skills" %><%= form.hidden_field :language_skills, value: old_or_session("language_skills") %></td>
+        <td class="sub-title"><%= form.label :english %></td>
+      </tr>
+      <tr>
+        <td>
+          <%= form.text_field :english, value: old_or_session("english_lang"), class:"form-control", name: 'english_lang'%>
+          <% if @applicant.errors[:english].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:english][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="sub-title"><%= form.label :japan %></td>
+      </tr>
+      <tr>
+        <td>
+          <%= form.text_field :japan, value: old_or_session("japan_lang"), class:"form-control", name: 'japan_lang' %>
+          <% if @applicant.errors[:japan].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:japan][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="sub-title"><%= form.label :other %></td>
+      </tr>
+      <tr>
+        <td>
+          <%= form.text_field :other_language, value: old_or_session("other_lang"), class:"form-control", name:'other_lang'%>
+          <% if @applicant.errors[:other_language].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:other_language][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    <table>
+      <th colspan=2>Experience</th>
+      <tr>
+        <td class="left"><%= form.label :has_job_exp, "Has Job Experience" %></td>
+        <td><%= form.check_box :has_job_exp, checked: old_or_session("has_job_exp")==1 ? true : false %></td>
+      </tr>
+      <tr class="job-sub-div" hidden>
+        <td class="left"><%= form.label :internship_info, "Internship Info" %></td>
+        <td>
+          <%= form.text_area :internship_info, value: old_or_session("internship_info"), class:"form-control"%>
+          <% if @applicant.errors[:internship_info].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:internship_info][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr class="job-sub-div" hidden>
+        <td class="left"><%= form.label :job_experiences, "Job Experience" %></td>
+        <td>
+          <%= form.text_area :job_experiences, value: old_or_session("job_experiences"), class:"form-control"%>
+          <% if @applicant.errors[:job_experiences].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:job_experiences][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr class="job-sub-div" hidden>
+        <td class="left"><%= form.label :total_exp_year, "Total Experience Years" %></td>
+        <td>
+          <%= form.text_field :total_exp_year, value: old_or_session("total_exp_year"), class:"form-control"%>
+          <% if @applicant.errors[:total_exp_year].any? %>
+            <div class="error-msg">This <%= @applicant.errors[:total_exp_year][0] %></div>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    <div class="submit-btn-div">
+      <%= link_to 'Reset', root_path , class:"btn btn-secondary" %>
+      <%= form.submit "Submit", :type => "submit", class: "btn " %>
+    </div>
+  <% end %>
+</div>
+<%= javascript_pack_tag 'applicants/new' %>

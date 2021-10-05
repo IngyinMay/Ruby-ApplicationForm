@@ -1,0 +1,115 @@
+<div class="container">
+	<h2 class="form-header">OJT Application Form</h2>
+	<%= form_for :applicant, url: applicants_path do |form| %>
+		<table>
+			<th colspan=2>Personal Information</th>
+			<tr>
+				<td class="left"><%= form.label :name, nil, class: 'required' %></td>
+				<td><%= form.text_field :name, value: session[:applicant]["name"], readonly: true, class: 'form-control' %></td>
+			</tr>
+			<tr>
+				<td class="left"><%= form.label :profile_photo, "Profile Picture"%></td>
+				<td>
+					<%= image_tag session[:applicant]["profile_photo_path"], class: 'w30' %>
+				</td>
+			</tr>
+			<tr>
+				<td class="left"><%= form.label :dob, "Date of Birth", class: "required"%></td>
+				<td><%= form.text_field :dob, value: session[:applicant]["dob"], readonly: true, class: 'form-control' %></td>
+			</tr>
+			<tr>
+				<td class="left"><%= form.label :phone_no1, "Phone", class: "required"%></td>
+				<td><%= form.text_field :phone_no1, value: session[:applicant]["phone_no1"], readonly: true, class: 'form-control' %><%= form.text_field :phone_no2, value: session[:applicant]["phone_no2"], readonly: true, class: 'form-control' %></td>
+			</tr>
+			<tr>
+				<td class="left"><%= form.label :email, class: "required"%></td>
+				<td><%= form.text_field :email, value: session[:applicant]["email"], readonly: true, class: 'form-control' %></td>
+			</tr>
+			<tr>
+				<td class="left"><%= form.label :current_address, class: "required"%></td>
+				<td><%= form.text_area :current_address, value: session[:applicant]["current_address"], readonly: true, class: 'form-control' %></td>
+			</tr>
+			<tr>
+				<td class="left"><%= form.label :hometown_address%></td>
+				<td><%= form.text_area :hometown_address, value: session[:applicant]["hometown_address"], readonly: true, class: 'form-control' %></td>
+			</tr>
+		</table>
+		<table>
+			<th colspan=2>Education Background</th>
+			<tr>
+				<td rowspan=6 class="left"><%= form.label :education, "Education Level", class: "required"%></td>
+				<td class="sub-title"><%= form.label :bachelor, class: "required" %></td>
+			</tr>
+			<tr>
+				<td class="td-sub-title"><%= form.label :university, class:"w24 required" %><%= form.label :year, class:"w24 required" %><%= form.label :degree, class:"w24 required" %></td>
+			</tr>
+			<tr>
+				<td>
+					<%= form.text_field :university, value: session[:applicant]["university"], readonly: true, class:"form-control w24"%>
+					<%= form.text_field :graduated_year, value: session[:applicant]["graduated_year"], readonly: true, class:"form-control w24"%>
+					<%= form.text_field :degree, value: session[:applicant]["degree"], readonly: true, class:"form-control w24"%>
+				</td>
+			</tr>
+			<tr>
+				<td class="sub-title"><%= form.label :master %></td>
+			</tr>
+			<tr>
+				<td class="td-sub-title"><%= form.label :university, class:"w24" %><%= form.label :year, class:"w24" %><%= form.label :degree, class:"w24" %></td>
+			</tr>
+			<tr>
+				<td>
+					<%= form.text_field :master_university, value: session[:applicant]["master_university"], readonly: true, class:"form-control w24"%>
+					<%= form.text_field :master_graduated_year, value: session[:applicant]["master_graduated_year"], readonly: true, class:"form-control w24"%>
+					<%= form.text_field :master_degree, value: session[:applicant]["master_degree"], readonly: true, class:"form-control w24"%>
+				</td>
+			</tr>
+			<tr>
+				<td class="left"><%= form.label :diploma, "Diploma Name" %></td>
+				<td>
+					<%= form.text_field :diploma_name, value: session[:applicant]["diploma_name"], readonly: true, class:"form-control"%>
+				</td>
+			</tr>
+			<tr>
+				<td class="left"><%= form.label :certificate, "Other certificate" %></td>
+				<td>
+					<%= form.text_field :certificate, value: session[:applicant]["certificate"], readonly: true, class:"form-control"%>
+				</td>
+			</tr>
+			<tr>
+				<td class="left"><%= form.label :programming, "Programming Skill" %><%= form.hidden_field :career_skills %></td>
+				<td> <%= form.text_area :career_skills, value: session[:applicant]["career_skill_text"], readonly: true, class:"form-control"%></td>
+			</tr>
+			<tr>
+				<td class="left"><%= form.label :language, "Language Skills" %><%= form.hidden_field :language_skills %></td>
+				<td><%= form.text_area :language_skills, value: session[:applicant]["lang_skill_text"], readonly: true, class:"form-control"%></td>
+			</tr>
+		</table>
+		<% if (session[:applicant]["has_job_exp"]) %>
+			<table>
+				<th colspan=2>Experience</th>
+				<tr>
+					<td class="left"><%= form.label :internship_info, "Internship Info" %></td>
+					<td>
+						<%= form.text_area :internship_info, value: session[:applicant]["internship_info"], readonly: true, class:"form-control"%>
+					</td>
+				</tr>
+				<tr>
+					<td class="left"><%= form.label :job_experiences, "Job Experience" %></td>
+					<td>
+						<%= form.text_area :job_experiences, value: session[:applicant]["job_experiences"], readonly: true, class:"form-control"%>
+					</td>
+				</tr>
+				<tr>
+					<td class="left"><%= form.label :total_exp_year, "Total Experience Years" %></td>
+					<td>
+						<%= form.text_field :total_exp_year, value: session[:applicant]["total_exp_year"], readonly: true, class:"form-control"%>
+					</td>
+				</tr>
+			</table>
+		<% end %>
+    <div class="submit-btn-div">
+	  <%= link_to 'Back', root_path , class:"btn btn-secondary" %>
+      <%= form.submit "Submit", :type => "submit", :class => 'btn' %>
+    </div>
+	<% end%>
+</div>
